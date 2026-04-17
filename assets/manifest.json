@@ -1,0 +1,11 @@
+[
+  {
+    "id": "ecs-explained",
+    "title": "ECS Explained: Why Clockwork Uses It (and Why You Should Care)",
+    "author": "Kohan",
+    "date": "2026-04-05",
+    "tags": ["ecs", "clockwork", "explained"],
+    "description": "An in-depth look at why Clockwork uses an Entity Component System (ECS) architecture, and how it benefits game development.",
+    "file": "assets/ecs-explained.md"
+  }
+]
