@@ -4,7 +4,7 @@ Here's a fun thought experiment: if you got hit by a bus tomorrow, could anyone 
 
 For us, the honest answer was no. Everything lived behind SSH keys only Kohan had, on a VPS only Kohan understood, running a topology that existed entirely in Kohan's head. Very efficient. Extremely bus-unsafe.
 
-So we set out to fix that. What followed was two servers, one from-scratch control panel install, six services dragged kicking and screaming into Docker, and a genuine near-miss with a prodution database.
+So we set out to fix that. What followed was two servers, one from-scratch control panel install, six services dragged kicking and screaming into Docker, and a genuine near-miss with a production database.
 
 Here's how it went.
 
@@ -44,7 +44,7 @@ We migrated services roughly easiest-to-hardest:
 
 - A UDP game relay, Dockerized in about ten minutes, no drama
 - Two portfolio sites, nearly identical, both hit the exact same bug: mounting a single JSON file as a Docker volume means you can't atomically overwrite it, because you're trying to replace a bind-mounted file, not a normal one. `Errno 16: Resource busy`, learned the hard way, fixed by mounting a directory instead
-- `vault`, rebound to localhost, proxied behind CyberPane, life is good when the system you're tryig to DOckerize runs in a docker container already
+- `vault`, rebound to localhost, proxied behind CyberPanel, life is good when the system you're trying to Dockerize runs in a docker container already
 
 And then there was Gitea.
 
@@ -56,7 +56,7 @@ CyberPanel's installer, in the process of setting up its own local MySQL, quietl
 
 We had a backup in progress. It failed mid-dump, at exactly the moment the database access broke, producing an 11GB zip file that was, delightfully, corrupted beyond opening. Truly a backup in the theoretical sense only.
 
-For those unaware of hwo git works, however, here's what saved us: git doesn't need a database to have your commit history. The actual repositories (every commit, every branch, one repo's entire fork lineage) were sitting untouched on disk the whole time, because Gitea stores git data as, well, git data, and only uses the database for the platform layer on top (issues, PRs, users, and critically, the "this repo is a fork of that repo" relationship).
+For those unaware of how git works, however, here's what saved us: git doesn't need a database to have your commit history. The actual repositories (every commit, every branch, one repo's entire fork lineage) were sitting untouched on disk the whole time, because Gitea stores git data as, well, git data, and only uses the database for the platform layer on top (issues, PRs, users, and critically, the "this repo is a fork of that repo" relationship).
 
 So we did the only reasonable thing: stood up a brand new database, let Gitea build a fresh schema against it, used its built-in repository-adoption tool to re-link the untouched git data, and then went spelunking through its schema and hand-wrote the SQL to restore the fork relationships ourselves.
 
