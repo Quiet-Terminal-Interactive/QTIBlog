@@ -7,5 +7,14 @@
     "tags": ["ecs", "clockwork", "explained"],
     "description": "An in-depth look at why Clockwork uses an Entity Component System (ECS) architecture, and how it benefits game development.",
     "file": "assets/ecs-explained.md"
+  },
+  {
+    "id": "bus-factor",
+    "title": "We Gave Ourselves a Bus Factor (And Immediately Regretted It)",
+    "author": "Kohan",
+    "date": "2026-09-16",
+    "tags": ["infra", "devops", "postmortem"],
+    "description": "Hardening two VPSes, losing a database, and finding out what else was quietly running on port 5512.",
+    "file": "assets/bus-factor.md"
   }
 ]
